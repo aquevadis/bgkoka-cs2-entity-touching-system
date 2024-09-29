@@ -1,13 +1,9 @@
 ﻿using CounterStrikeSharp.API.Core;
+using static EntitySubSystemBase.EntityTouch;
 
 namespace EntitySubSystemBase;
 
 public static class EntitySystem {
-
-    /// <summary>
-    /// Global list for all entities
-    /// </summary>
-    internal static readonly List</*entity index*/uint> _entities_indexes = new();
 
     static EntitySystem()
     {
@@ -16,11 +12,8 @@ public static class EntitySystem {
     public static void ClearAllManagedEntities() {
 
         //clear the list of _entities_has_touch
-        if (EntityTouch._entities_have_touch.Count > 0)
-            EntityTouch._entities_have_touch.Clear();
-
-        if (_entities_indexes.Count > 0)
-            _entities_indexes.Clear();
+        if (_entities_have_touch.Count > 0)
+            _entities_have_touch.Clear();
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -33,7 +26,6 @@ public static class EntitySystem {
 
         if (entity.ValidateEntity() is not true) return;
 
-        _entities_indexes.Add(entity.Index);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -45,9 +37,6 @@ public static class EntitySystem {
 
         if (entity.ValidateEntity() is not true) return;
 
-        if (_entities_indexes.Contains(entity.Index) is not true) return;
-
-        _entities_indexes.Remove(entity.Index);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;

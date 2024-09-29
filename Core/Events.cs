@@ -1,6 +1,8 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Entities;
+using static EntitySubSystemBase.EntityTouch;
+using static EntitySubSystemBase.EntitySystem;
 
 namespace EntitySubSystemBase;
 
@@ -13,8 +15,8 @@ public partial class EntitySubSystemBase
         RegisterListener<Listeners.OnClientAuthorized>(OnClientAuthorized);
         RegisterListener<Listeners.OnClientDisconnect>(OnClientDisconnected);
         RegisterListener<Listeners.OnTick>(OnTick);
-        RegisterListener<Listeners.OnEntityCreated>(OnEntityCreated);
-        RegisterListener<Listeners.OnEntityDeleted>(OnEntityDeleted);
+        RegisterListener<Listeners.OnEntityCreated>(OnEntityCreatedBase);
+        RegisterListener<Listeners.OnEntityDeleted>(OnEntityDeletedBase);
 
         //register event listeners
         RegisterEventHandler<EventRoundEnd>(OnRoundEnd);
@@ -28,8 +30,8 @@ public partial class EntitySubSystemBase
         RemoveListener<Listeners.OnClientAuthorized>(OnClientAuthorized);
         RemoveListener<Listeners.OnClientDisconnect>(OnClientDisconnected);
         RemoveListener<Listeners.OnTick>(OnTick);
-        RemoveListener<Listeners.OnEntityCreated>(OnEntityCreated);
-        RemoveListener<Listeners.OnEntityDeleted>(OnEntityDeleted);
+        RemoveListener<Listeners.OnEntityCreated>(OnEntityCreatedBase);
+        RemoveListener<Listeners.OnEntityDeleted>(OnEntityDeletedBase);
 
         //deregister event listeners
         DeregisterEventHandler<EventRoundEnd>(OnRoundEnd);
@@ -43,19 +45,19 @@ public partial class EntitySubSystemBase
 
     }
 
-    public static void OnEntityCreated(CEntityInstance entity)
+    public static void OnEntityCreatedBase(CEntityInstance entity)
 	{
         if (entity.ValidateEntity() is not true) return;
         
         if (entity.DesignerName.Contains("ak47"))
             entity.StartTouch();
         
-        EntitySystem.OnEntityCreated(entity);
+        OnEntityCreated(entity);
     }
 
-    public static void OnEntityDeleted(CEntityInstance entity)
+    public static void OnEntityDeletedBase(CEntityInstance entity)
 	{
-        EntitySystem.OnEntityRemoved(entity);
+        OnEntityRemoved(entity);
     }
 
     private void OnClientAuthorized(int slot, SteamID steamid)
@@ -88,8 +90,8 @@ public partial class EntitySubSystemBase
         var weapon = playerPawn.WeaponServices?.ActiveWeapon.Value;
         if (weapon is null || weapon.ValidateEntity() is not true) return HookResult.Continue;
 
-        if (EntityTouch._entities_have_touch.Contains(weapon.Index) is true) 
-            EntityTouch._entities_have_touch.Remove(weapon.Index);
+        if (_entities_have_touch.Contains(weapon.Index) is true) 
+            _entities_have_touch.Remove(weapon.Index);
 
         return HookResult.Continue;
     }
@@ -110,8 +112,8 @@ public partial class EntitySubSystemBase
 
             if (weapon is null || weapon.IsValid is not true) continue;
 
-            if (EntityTouch._entities_have_touch.Contains(weapon.Index) is true) 
-                EntityTouch._entities_have_touch.Remove(weapon.Index);
+            if (_entities_have_touch.Contains(weapon.Index) is true) 
+                _entities_have_touch.Remove(weapon.Index);
         }
 
         return HookResult.Continue;
@@ -121,7 +123,7 @@ public partial class EntitySubSystemBase
     private HookResult OnRoundEnd(EventRoundEnd @event, GameEventInfo info)
     {
 
-        EntitySystem.ClearAllManagedEntities();
+        ClearAllManagedEntities();
 
         return HookResult.Continue;
 

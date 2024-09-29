@@ -48,7 +48,6 @@ public static class EntityTouch {
 
     public static void OnPlayerEntityThink(CCSPlayerPawn playerPawn) {
 
-
         foreach (var entity_has_touch in _entities_have_touch)
         {
             
@@ -68,10 +67,8 @@ public static class EntityTouch {
                 Console.ResetColor();
 
             }
-
-            
         }
-
+        
     }
 
 
