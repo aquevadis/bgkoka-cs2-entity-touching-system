@@ -1,6 +1,6 @@
-### CS2 Massacre's server Premium Extras
+### CS2 Entity Touch sub system
 
 ## Features:
 
-- [x] Golden Kill Feed
-- [x] Custom Knife Models
+- [x] Listening to entities that are touched by players
+- [ ] Listening to entities that are touched by other entities
