@@ -49,7 +49,7 @@ public static class Entities {
         public static bool Collides(Vector entityPosition, Vector pointOfColision) 
         {
             var distSrt = Vector3DistanceSquared(/*position of the entity's that has OnTouch*/entityPosition, pointOfColision);
-            var radiusSquared = Math.Pow(30, 2);
+            var radiusSquared = Math.Pow(40, 2);
 
             return distSrt < radiusSquared;
 

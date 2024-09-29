@@ -8,7 +8,7 @@ public static class EntityTouch {
     /// <summary>
     /// Global list for all entities that have enabled touching capabilities
     /// </summary>
-    internal static readonly List</*entity index*/uint> _entities_have_touch = new();
+    internal static readonly List<CEntityInstance> _entities_have_touch = new();
 
     //construct
     static EntityTouch()
@@ -20,9 +20,9 @@ public static class EntityTouch {
         if (entity is null || entity.ValidateEntity() is not true) return;
 
         //avoid adding the entity twice
-        if (_entities_have_touch.Contains(entity.Index) is true) return;
+        if (_entities_have_touch.Contains(entity) is true) return;
 
-        _entities_have_touch.Add(entity.Index);
+        _entities_have_touch.Add(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -35,9 +35,9 @@ public static class EntityTouch {
 
         if (entity is null || entity.ValidateEntity() is not true) return;
 
-        if (_entities_have_touch.Contains(entity.Index) is not true) return;
+        if (_entities_have_touch.Contains(entity) is not true) return;
 
-        _entities_have_touch.Add(entity.Index);
+        _entities_have_touch.Add(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -51,19 +51,22 @@ public static class EntityTouch {
         foreach (var entity_has_touch in _entities_have_touch)
         {
             
-            var entity = Utilities.GetEntityFromIndex<CBaseEntity>((int)entity_has_touch);
-            if (entity is null || entity.ValidateEntity() is not true) continue;
-            
-            if (entity.AbsOrigin is null || playerPawn.AbsOrigin is null) continue;
+            var base_touching_entity = entity_has_touch.As<CBaseEntity>();
 
-            if (Entities.Collides(entity.AbsOrigin, playerPawn.AbsOrigin)) {
+            if (base_touching_entity is null 
+                                        || base_touching_entity.ValidateEntity() is not true) continue;
+            
+
+            if (base_touching_entity.AbsOrigin is null || playerPawn.AbsOrigin is null) continue;
+
+            if (Entities.Collides(base_touching_entity.AbsOrigin, playerPawn.AbsOrigin)) {
 
                 var player = playerPawn.OriginalController.Value;
                 if (player is null || player.ValidateEntity() is not true) continue;
 
                 //debug log:
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"[OnEntityTouchByPlayer] {entity.DesignerName} touched by {player.DesignerName}");
+                Console.WriteLine($"[OnEntityTouchByPlayer] {base_touching_entity.DesignerName} touched by {player.DesignerName}");
                 Console.ResetColor();
 
             }

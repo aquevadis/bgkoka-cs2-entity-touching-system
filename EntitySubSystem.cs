@@ -11,7 +11,7 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 {
     public override string ModuleName => "Entity Touch System";
     public override string ModuleAuthor => "AquaVadis";
-    public override string ModuleVersion => "1.0.1s";
+    public override string ModuleVersion => "1.0.2s";
     public required CoreConfig Config { get; set; }
 
     public static readonly List<int> _cachedPlayers = new();

@@ -17,7 +17,7 @@ public partial class EntitySubSystemBase
 
         //register event listeners
         RegisterEventHandler<EventRoundEnd>(OnRoundEnd);
-        RegisterEventHandler<EventItemEquip>(OnItemEquip);
+        RegisterEventHandler<EventItemEquip>(OnItemEquipPre, HookMode.Pre);
 
     }
 
@@ -29,7 +29,7 @@ public partial class EntitySubSystemBase
 
         //deregister event listeners
         DeregisterEventHandler<EventRoundEnd>(OnRoundEnd);
-        DeregisterEventHandler<EventItemEquip>(OnItemEquip);
+        DeregisterEventHandler<EventItemEquip>(OnItemEquipPre, HookMode.Pre);
 
     }
 
@@ -43,8 +43,9 @@ public partial class EntitySubSystemBase
         OnEntityRemoved(entity);
     }
 
-    private HookResult OnItemPickUpPre(EventItemPickup @event, GameEventInfo info)
+    private HookResult OnItemEquipPre(EventItemEquip @event, GameEventInfo info)
     {
+
         var player = @event.Userid;
         if (player == null || player.IsValid is not true || player.PawnIsAlive is not true || player.IsHLTV is true) return HookResult.Continue;
         
@@ -53,32 +54,9 @@ public partial class EntitySubSystemBase
 
         var weapon = playerPawn.WeaponServices?.ActiveWeapon.Value;
         if (weapon is null || weapon.ValidateEntity() is not true) return HookResult.Continue;
-
-        if (_entities_have_touch.Contains(weapon.Index) is true) 
-            _entities_have_touch.Remove(weapon.Index);
-
-        return HookResult.Continue;
-    }
-
-    private HookResult OnItemEquip(EventItemEquip @event, GameEventInfo info)
-    {
-
-        var player = @event.Userid;
-        if (player == null || player.IsValid is not true || player.PawnIsAlive is not true || player.IsHLTV is true) return HookResult.Continue;
         
-        var playerPawn = player!.PlayerPawn.Value;
-        if (playerPawn == null || playerPawn.IsValid is not true) return HookResult.Continue;
-
-        var weapons = playerPawn.WeaponServices?.MyWeapons;
-        if (weapons is null ) return HookResult.Continue;
-
-        foreach (var weapon in weapons) {
-
-            if (weapon is null || weapon.IsValid is not true) continue;
-
-            if (_entities_have_touch.Contains(weapon.Index) is true) 
-                _entities_have_touch.Remove(weapon.Index);
-        }
+        if (_entities_have_touch.Contains(weapon.As<CEntityInstance>()) is true) 
+            _entities_have_touch.Remove(weapon.As<CEntityInstance>());
 
         return HookResult.Continue;
     }
