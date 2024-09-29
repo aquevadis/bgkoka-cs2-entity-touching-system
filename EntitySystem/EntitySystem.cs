@@ -26,6 +26,8 @@ public static class EntitySystem {
 
         if (entity.ValidateEntity() is not true) return;
 
+        if (entity.DesignerName.Contains("ak47") is true)
+            entity.StartTouch();
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
