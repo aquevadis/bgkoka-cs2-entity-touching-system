@@ -12,9 +12,6 @@ public partial class EntitySubSystemBase
     private void RegisterListeners()
     {
         //register listeners
-        RegisterListener<Listeners.OnClientAuthorized>(OnClientAuthorized);
-        RegisterListener<Listeners.OnClientDisconnect>(OnClientDisconnected);
-        RegisterListener<Listeners.OnTick>(OnTick);
         RegisterListener<Listeners.OnEntityCreated>(OnEntityCreatedBase);
         RegisterListener<Listeners.OnEntityDeleted>(OnEntityDeletedBase);
 
@@ -27,9 +24,6 @@ public partial class EntitySubSystemBase
     private void DeregisterListeners()
     {
         //remove listeners
-        RemoveListener<Listeners.OnClientAuthorized>(OnClientAuthorized);
-        RemoveListener<Listeners.OnClientDisconnect>(OnClientDisconnected);
-        RemoveListener<Listeners.OnTick>(OnTick);
         RemoveListener<Listeners.OnEntityCreated>(OnEntityCreatedBase);
         RemoveListener<Listeners.OnEntityDeleted>(OnEntityDeletedBase);
 
@@ -39,44 +33,14 @@ public partial class EntitySubSystemBase
 
     }
 
-    public void OnTick() {
-
-        
-
-    }
-
     public static void OnEntityCreatedBase(CEntityInstance entity)
 	{
-        if (entity.ValidateEntity() is not true) return;
-        
-        if (entity.DesignerName.Contains("ak47"))
-            entity.StartTouch();
-        
         OnEntityCreated(entity);
     }
 
     public static void OnEntityDeletedBase(CEntityInstance entity)
 	{
         OnEntityRemoved(entity);
-    }
-
-    private void OnClientAuthorized(int slot, SteamID steamid)
-    {
-
-        var player = Utilities.GetPlayerFromSlot(slot);
-        if (player is null || player.IsValid is not true) return;
-
-        _cachedPlayers.Add(player.Slot);
-    }
-
-    private void OnClientDisconnected(int slot)
-    {
-
-        var player = Utilities.GetPlayerFromSlot(slot);
-        if (player is null || player.IsValid is not true) return;
-
-        if (_cachedPlayers.Contains(player.Slot))
-            _cachedPlayers.Remove(player.Slot); 
     }
 
     private HookResult OnItemPickUpPre(EventItemPickup @event, GameEventInfo info)
@@ -117,16 +81,13 @@ public partial class EntitySubSystemBase
         }
 
         return HookResult.Continue;
-
     }
 
     private HookResult OnRoundEnd(EventRoundEnd @event, GameEventInfo info)
     {
 
         ClearAllManagedEntities();
-
         return HookResult.Continue;
-
     }
 
 
