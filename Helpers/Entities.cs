@@ -5,17 +5,11 @@ namespace EntitySubSystemBase;
 
 public static class Entities {
 
-        public enum CONSTANTS_ES : uint {
-
-            ZERO = 0,
-            MAX_ENTITIES = 32768,
-        }
-    
         /// <summary>
-        /// Fully checks if enrity is valid
+        /// Fully checks if entity is valid
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns>true if IsValid; NOT 0 and above 32768</returns>
+        /// <returns>true if IsValid; NOT 0 and below max entities(32768)</returns>
         public static bool ValidateEntity(this CEntityInstance entity) {
 
             if (entity.IsValid is not true 
@@ -26,10 +20,10 @@ public static class Entities {
         }
 
         /// <summary>
-        /// Fully checks if enrity is valid
+        /// Fully checks if entity is valid and if it belongs to a player
         /// </summary>
         /// <param name="entity"></param>
-        /// <returns>true if IsValid; NOT 0;above 32768 and having player in their designer name</returns>
+        /// <returns>true if IsValid; NOT 0;below 32768 and is player entity</returns>
         public static bool ValidatePotentialPlayerEntity(this CEntityInstance entity) {
 
             if (entity.IsValid is not true 

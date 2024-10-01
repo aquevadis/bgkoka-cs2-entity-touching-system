@@ -15,6 +15,10 @@ public static class EntityTouch {
     {
     }
 
+    /// <summary>
+    /// Enable touch capabilities for an entity
+    /// </summary>
+    /// <param name="entity">entity that will fire when touched</param>
     public static void StartTouch(this CEntityInstance entity) {
 
         if (entity is null || entity.ValidateEntity() is not true) return;
@@ -31,13 +35,17 @@ public static class EntityTouch {
         
     }
 
+    /// <summary>
+    /// Remove touch capabilities for an entity
+    /// </summary>
+    /// <param name="entity">entity that will no longer fire when touched</param>
     public static void RemoveTouch(this CEntityInstance entity) {
 
         if (entity is null || entity.ValidateEntity() is not true) return;
 
         if (_entities_have_touch.Contains(entity) is not true) return;
 
-        _entities_have_touch.Add(entity);
+        _entities_have_touch.Remove(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -46,22 +54,30 @@ public static class EntityTouch {
 
     }
 
-    public static void OnPlayerEntityThink(CCSPlayerPawn playerPawn) {
+    /// <summary>
+    /// Initiated from each player
+    /// Called in Core/Hooks.cs
+    /// </summary>
+    /// <param name="playerPawn">the playerPawn that is currently thinking</param>
+    public static void OnPlayerEntityThink(CCSPlayerPawnBase playerPawnBase) {
 
+        //only valid,alive and player pawns can think
+        if (playerPawnBase is null  || playerPawnBase.IsValid is not true 
+        || playerPawnBase.LifeState is not (byte)LifeState_t.LIFE_ALIVE
+        || playerPawnBase.DesignerName.Contains("player") is not true) return;
+
+        //cycle through the thinkinh entities to fire touch
         foreach (var entity_has_touch in _entities_have_touch)
         {
             
             var base_touching_entity = entity_has_touch.As<CBaseEntity>();
-
-            if (base_touching_entity is null 
-                                        || base_touching_entity.ValidateEntity() is not true) continue;
+            if (base_touching_entity is null || base_touching_entity.ValidateEntity() is not true) continue;
             
+            if (base_touching_entity.AbsOrigin is null || playerPawnBase.AbsOrigin is null) continue;
 
-            if (base_touching_entity.AbsOrigin is null || playerPawn.AbsOrigin is null) continue;
+            if (Entities.Collides(base_touching_entity.AbsOrigin, playerPawnBase.AbsOrigin)) {
 
-            if (Entities.Collides(base_touching_entity.AbsOrigin, playerPawn.AbsOrigin)) {
-
-                var player = playerPawn.OriginalController.Value;
+                var player = playerPawnBase.OriginalController.Value;
                 if (player is null || player.ValidateEntity() is not true) continue;
 
                 //debug log:

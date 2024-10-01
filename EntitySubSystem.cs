@@ -11,10 +11,8 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 {
     public override string ModuleName => "Entity Touch System";
     public override string ModuleAuthor => "AquaVadis";
-    public override string ModuleVersion => "1.0.2s";
+    public override string ModuleVersion => "1.0.3s";
     public required CoreConfig Config { get; set; }
-
-    public static readonly List<int> _cachedPlayers = new();
 
     public override void Load(bool hotReload)
     {
@@ -30,21 +28,6 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 
         if(Config.DebugMode)
         SendMessageToInternalConsole(msg: "<=========== [EntitySubSystem] LOADED SUCCESSFULLY ===========>", print: PrintTo.ConsoleSucess);
-        
-        if (hotReload) {
-
-            var players = Utilities.GetPlayers().Where(player => 
-                player is not null
-                && player.IsValid is true
-                && player.PawnIsAlive is true
-            );
-
-            foreach (var player in players)
-            {
-                _cachedPlayers.Add(player.Slot);
-            }
-
-        }
         
     }
 

@@ -11,7 +11,7 @@ public static class EntitySystem {
 
     public static void ClearAllManagedEntities() {
 
-        //clear the list of _entities_has_touch
+        //clear the list of _entities_have_touch
         if (_entities_have_touch.Count > 0)
             _entities_have_touch.Clear();
 
@@ -26,6 +26,7 @@ public static class EntitySystem {
 
         if (entity.ValidateEntity() is not true) return;
 
+        //test touch for ak47 created entities
         if (entity.DesignerName.Contains("ak47") is true)
             entity.StartTouch();
 
@@ -39,6 +40,9 @@ public static class EntitySystem {
 
         if (entity.ValidateEntity() is not true) return;
 
+        if (_entities_have_touch.Contains(entity) is not true) return;
+
+        _entities_have_touch.Remove(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -46,9 +50,4 @@ public static class EntitySystem {
         Console.ResetColor();
     }
 
-    // public CBaseEntity? Add()
-    // {
-
-    //     return default;
-    // }
 }

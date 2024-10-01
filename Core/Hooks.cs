@@ -32,12 +32,7 @@ public partial class EntitySubSystemBase
         var playerPawnBase = hook.GetParam<CCSPlayerPawnBase>(0);
         if (playerPawnBase is null || playerPawnBase.IsValid is not true) return HookResult.Continue;
 
-        var playerPawn = playerPawnBase.As<CCSPlayerPawn>();
-        
-        if (playerPawn is null 
-                        || playerPawn.IsValid is not true || playerPawn.LifeState is not (byte)LifeState_t.LIFE_ALIVE) return HookResult.Continue;
-
-        EntityTouch.OnPlayerEntityThink(playerPawn);
+        EntityTouch.OnPlayerEntityThink(playerPawnBase);
 
         return HookResult.Continue;
 
