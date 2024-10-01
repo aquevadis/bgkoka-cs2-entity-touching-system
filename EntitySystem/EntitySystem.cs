@@ -9,6 +9,7 @@ public static class EntitySystem {
     {
     }
 
+    //callled in Core/Events.cs
     public static void ClearAllManagedEntities() {
 
         //clear the list of _entities_have_touch
@@ -22,6 +23,7 @@ public static class EntitySystem {
 
     }
 
+    //callled in Core/Events.cs
     public static void OnEntityCreated(CEntityInstance entity) {
 
         if (entity.ValidateEntity() is not true) return;
@@ -29,25 +31,19 @@ public static class EntitySystem {
         //test touch for ak47 created entities
         if (entity.DesignerName.Contains("ak47") is true)
             entity.StartTouch();
-
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][OnEntityCreated] Added entity index {entity.Index} to the list");
-        Console.ResetColor();
+  
     }
 
+    //callled in Core/Events.cs
     public static void OnEntityRemoved(CEntityInstance entity) {
 
         if (entity.ValidateEntity() is not true) return;
 
         if (_entities_have_touch.Contains(entity) is not true) return;
-
+        
+        //remove the touching capability if the self entity is removed itself
         _entities_have_touch.Remove(entity);
 
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][OnEntityCreated] Removed entity index {entity.Index} from the list");
-        Console.ResetColor();
     }
 
 }
