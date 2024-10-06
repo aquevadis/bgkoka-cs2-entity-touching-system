@@ -2,6 +2,8 @@
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes;
+using CounterStrikeSharp.API.Core.Capabilities;
+using EssAPI;
 
 namespace EntitySubSystemBase;
 
@@ -9,13 +11,21 @@ namespace EntitySubSystemBase;
 
 public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 {
-    public override string ModuleName => "Entity Touch System";
+    public override string ModuleName => "Entity Sub System";
     public override string ModuleAuthor => "AquaVadis";
     public override string ModuleVersion => "1.0.3s";
     public required CoreConfig Config { get; set; }
+    
+    //register API
+    public IEssAPI EntitySystemAPI { get; set; } = null!;
+    private readonly PluginCapability<IEssAPI> _pluginCapability = new("ess:core");
 
     public override void Load(bool hotReload)
     {
+
+        //register api
+        EntitySystemAPI = new EssAPI();
+        Capabilities.RegisterPluginCapability(_pluginCapability, () => EntitySystemAPI);
 
         InitializeVirtualFunctions();
         if(Config.DebugMode)

@@ -29,8 +29,8 @@ public static class EntitySystem {
         if (entity.ValidateEntity() is not true) return;
 
         //test touch for ak47 created entities
-        if (entity.DesignerName.Contains("ak47") is true)
-            entity.StartTouch();
+        // if (entity.DesignerName.Contains("ak47") is true)
+        //     entity.StartTouch();
   
     }
 

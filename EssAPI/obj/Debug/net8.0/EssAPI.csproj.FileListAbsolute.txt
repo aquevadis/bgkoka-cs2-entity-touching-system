@@ -1,0 +1,13 @@
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\bin\Debug\net8.0\EssAPI.deps.json
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\bin\Debug\net8.0\EssAPI.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\bin\Debug\net8.0\EssAPI.pdb
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.csproj.AssemblyReference.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.AssemblyInfoInputs.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.AssemblyInfo.cs
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.csproj.CoreCompileInputs.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.sourcelink.json
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\refint\EssAPI.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\EssAPI.pdb
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EssAPI\obj\Debug\net8.0\ref\EssAPI.dll

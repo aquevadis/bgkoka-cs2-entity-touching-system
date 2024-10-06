@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using EssAPI;
 
 namespace EntitySubSystemBase;
 
@@ -77,18 +78,22 @@ public static class EntityTouch {
 
             if (Entities.Collides(base_touching_entity.AbsOrigin, playerPawnBase.AbsOrigin)) {
 
-                var player = playerPawnBase.OriginalController.Value;
-                if (player is null || player.ValidateEntity() is not true) continue;
-
-                //debug log:
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"[OnEntityTouchByPlayer] {base_touching_entity.DesignerName} touched by {player.DesignerName}");
-                Console.ResetColor();
+                OnEntityTouchedByPlayer(base_touching_entity, playerPawnBase);
 
             }
         }
         
     }
 
+    public static void OnEntityTouchedByPlayer(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
+
+        var player = touchingPlayerPawnBase.OriginalController.Value;
+        if (player is null || player.ValidateEntity() is not true) return;
+
+        //debug log:
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"[OnEntityTouchByPlayer] {touchedEntity.DesignerName} touched by {player.DesignerName}");
+        Console.ResetColor();
+    }
 
 }
