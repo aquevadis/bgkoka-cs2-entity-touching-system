@@ -1,10 +1,13 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
+using CounterStrikeSharp.API.Core.Capabilities;
 using static EssAPI.IEssAPI;
 
 namespace EssAPI;
 
 public interface IEssAPI {
+
+    public static readonly PluginCapability<IEssAPI> Capability = new("ess:core");
 
     /// <summary>
     /// Enable touch capabilities for an entity
