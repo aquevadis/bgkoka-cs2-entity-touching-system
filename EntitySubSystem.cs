@@ -17,14 +17,14 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
     public required CoreConfig Config { get; set; }
     
     //register API
-    public IEssAPI EntitySystemAPI { get; set; } = null!;
+    public IEssAPI IEssAPI { get; set; } = null!;
 
     public override void Load(bool hotReload)
     {
 
         //register api
-        EntitySystemAPI = new EssAPI();
-        Capabilities.RegisterPluginCapability(IEssAPI.Capability, () => EntitySystemAPI);
+        IEssAPI = new EssAPI();
+        Capabilities.RegisterPluginCapability(IEssAPI.Capability, () => IEssAPI);
 
         InitializeVirtualFunctions();
         if(Config.DebugMode)
