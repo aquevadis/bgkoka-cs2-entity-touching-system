@@ -36,7 +36,7 @@ public class EssAPI : IEssAPI {
         Console.ResetColor();
     }
 
-    public void OnEntityTouchedByPlayer(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
+    public virtual void OnEntityTouchedByPlayer(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
 
         EntityTouchedByPlayer?.Invoke(touchedEntity, touchingPlayerPawnBase);
 
