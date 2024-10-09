@@ -55,5 +55,3 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
-EntitySubSystem/obj/Debug/net8.0/EntitySubSystem.AssemblyInfo.cs
-EntitySubSystem/obj/Debug/net8.0/EntitySubSystem.AssemblyInfoInputs.cache
