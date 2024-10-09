@@ -43,8 +43,10 @@ vignettes/*.pdf
 docs/
 bin/*
 obj/*
+
 EntitySubSystem/bin/*
 EntitySubSystem/obj/*
+
 EntitySubSystemAPI/bin/*
 EntitySubSystemAPI/obj/*
 
@@ -53,3 +55,5 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+EntitySubSystem/obj/Debug/net8.0/EntitySubSystem.AssemblyInfo.cs
+EntitySubSystem/obj/Debug/net8.0/EntitySubSystem.AssemblyInfoInputs.cache
