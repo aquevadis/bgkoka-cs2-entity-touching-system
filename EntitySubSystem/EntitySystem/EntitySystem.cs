@@ -1,13 +1,9 @@
 ﻿using CounterStrikeSharp.API.Core;
-using static EntitySubSystemBase.EntityTouch;
 
 namespace EntitySubSystemBase;
 
-public static class EntitySystem {
+public partial class EntitySubSystemBase {
 
-    static EntitySystem()
-    {
-    }
 
     //callled in Core/Events.cs
     public static void ClearAllManagedEntities() {

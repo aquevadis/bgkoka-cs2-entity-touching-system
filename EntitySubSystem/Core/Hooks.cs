@@ -14,12 +14,12 @@ public partial class EntitySubSystemBase
         CCSPlayerPawnBase_PostThinkFunc = new (GameData.GetSignature("CCSPlayerPawnBase_PostThink"));
 
         //hook the post pawn think
-        //CCSPlayerPawnBase_PostThinkFunc.Hook(PawnPostThinkFunc, HookMode.Pre);
+        CCSPlayerPawnBase_PostThinkFunc.Hook(PawnPostThinkFunc, HookMode.Pre);
     }
 
     public void DeinitializeVirtualFunctions() {
 
-        //CCSPlayerPawnBase_PostThinkFunc?.Unhook(PawnPostThinkFunc, HookMode.Pre);
+        CCSPlayerPawnBase_PostThinkFunc?.Unhook(PawnPostThinkFunc, HookMode.Pre);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ public partial class EntitySubSystemBase
         var playerPawnBase = hook.GetParam<CCSPlayerPawnBase>(0);
         if (playerPawnBase is null || playerPawnBase.IsValid is not true) return HookResult.Continue;
 
-        EntityTouch.OnPlayerEntityThink(playerPawnBase);
+        OnPlayerEntityThink(playerPawnBase);
 
         return HookResult.Continue;
 

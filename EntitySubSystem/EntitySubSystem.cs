@@ -3,7 +3,8 @@ using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Attributes;
 using CounterStrikeSharp.API.Core.Capabilities;
-using EssAPI;
+using EntitySubSystemAPI;
+using static EntitySubSystemAPI.IEntitySubSystemAPI;
 
 namespace EntitySubSystemBase;
 
@@ -11,20 +12,18 @@ namespace EntitySubSystemBase;
 
 public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 {
-    public override string ModuleName => "Entity Sub System";
+    public override string ModuleName => "Entity Sub System + API";
     public override string ModuleAuthor => "AquaVadis";
-    public override string ModuleVersion => "1.0.3s";
+    public override string ModuleVersion => "1.0.4s";
     public required CoreConfig Config { get; set; }
     
     //register API
-    public EssAPI EssAPI { get; set; } = null!;
+    public static PluginCapability<IEntitySubSystemAPI> Capability {get;} = new("ess:base");
+
+    public EntitySubSystemAPI Api { get; set; } = null!;
 
     public override void Load(bool hotReload)
     {
-
-        //register api
-        EssAPI = new EssAPI();
-        Capabilities.RegisterPluginCapability(IEssAPI.Capability, () => EssAPI);
 
         InitializeVirtualFunctions();
         if(Config.DebugMode)
@@ -37,7 +36,12 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
 
         if(Config.DebugMode)
         SendMessageToInternalConsole(msg: "<=========== [EntitySubSystem] LOADED SUCCESSFULLY ===========>", print: PrintTo.ConsoleSucess);
-        
+
+        //register api
+        Api = new EntitySubSystemAPI();
+        Capabilities.RegisterPluginCapability(Capability, () => Api);
+        SendMessageToInternalConsole(msg: $"<=========== [EntitySubSystem][API] Registered API", print: PrintTo.ConsoleInfo);
+
     }
 
     public override void Unload(bool hotReload)

@@ -1,26 +1,20 @@
-﻿using CounterStrikeSharp.API;
-using CounterStrikeSharp.API.Core;
-using EssAPI;
+﻿using CounterStrikeSharp.API.Core;
+using static EntitySubSystemAPI.IEntitySubSystemAPI;
 
 namespace EntitySubSystemBase;
 
-public static class EntityTouch {
+public partial class EntitySubSystemBase {
 
     /// <summary>
     /// Global list for all entities that have enabled touching capabilities
     /// </summary>
     internal static readonly List<CEntityInstance> _entities_have_touch = new();
 
-    //construct
-    static EntityTouch()
-    {
-    }
-
     /// <summary>
     /// Enable touch capabilities for an entity
     /// </summary>
     /// <param name="entity">entity that will fire when touched</param>
-    public static void StartTouch(this CEntityInstance entity) {
+    public static void StartTouch(CEntityInstance entity) {
 
         if (entity is null || entity.ValidateEntity() is not true) return;
 
@@ -28,11 +22,6 @@ public static class EntityTouch {
         if (_entities_have_touch.Contains(entity) is true) return;
 
         _entities_have_touch.Add(entity);
-
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][StartTouchOnEntity] Started Touch On entity index {entity.Index} (added to list)");
-        Console.ResetColor();
         
     }
 
@@ -40,18 +29,13 @@ public static class EntityTouch {
     /// Remove touch capabilities for an entity
     /// </summary>
     /// <param name="entity">entity that will no longer fire when touched</param>
-    public static void RemoveTouch(this CEntityInstance entity) {
+    public static void RemoveTouch(CEntityInstance entity) {
 
         if (entity is null || entity.ValidateEntity() is not true) return;
 
         if (_entities_have_touch.Contains(entity) is not true) return;
 
         _entities_have_touch.Remove(entity);
-
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][RemoveTouchOnEntity] Removed Touch On entity index {entity.Index} (added to list)");
-        Console.ResetColor();
 
     }
 
@@ -60,7 +44,7 @@ public static class EntityTouch {
     /// Called in Core/Hooks.cs
     /// </summary>
     /// <param name="playerPawn">the playerPawn that is currently thinking</param>
-    public static void OnPlayerEntityThink(CCSPlayerPawnBase playerPawnBase) {
+    public void OnPlayerEntityThink(CCSPlayerPawnBase playerPawnBase) {
 
         //only valid,alive and player pawns can think
         if (playerPawnBase is null  || playerPawnBase.IsValid is not true 
@@ -78,22 +62,22 @@ public static class EntityTouch {
 
             if (Entities.Collides(base_touching_entity.AbsOrigin, playerPawnBase.AbsOrigin)) {
 
-                OnEntityTouchedByPlayer(base_touching_entity, playerPawnBase);
+                OnEntityTouchedByPlayerBase(base_touching_entity, playerPawnBase);
 
             }
         }
         
     }
 
-    public static void OnEntityTouchedByPlayer(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
+    /// <summary>
+    /// forward event to API to be invoked to all consumers
+    /// </summary>
+    /// <param name="touchedEntity">Entity that has been touched</param>
+    /// <param name="touchingPlayerPawnBase">The player pawn that touched the entity</param>
+    public void OnEntityTouchedByPlayerBase(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
+        
+       Api.PlayerTouchEntity(touchedEntity, touchingPlayerPawnBase);
 
-        var player = touchingPlayerPawnBase.OriginalController.Value;
-        if (player is null || player.ValidateEntity() is not true) return;
-
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[OnEntityTouchByPlayer] {touchedEntity.DesignerName} touched by {player.DesignerName}");
-        Console.ResetColor();
     }
 
 }

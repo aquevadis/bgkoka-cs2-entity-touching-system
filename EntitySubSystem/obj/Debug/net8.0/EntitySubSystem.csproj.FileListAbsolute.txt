@@ -1,0 +1,16 @@
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.csproj.AssemblyReference.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.GeneratedMSBuildEditorConfig.editorconfig
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.AssemblyInfoInputs.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.AssemblyInfo.cs
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.csproj.CoreCompileInputs.cache
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.sourcelink.json
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\bin\Debug\net8.0\EntitySubSystem.deps.json
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\bin\Debug\net8.0\EntitySubSystem.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\bin\Debug\net8.0\EntitySubSystem.pdb
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\bin\Debug\net8.0\EntitySubSystemAPI.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\bin\Debug\net8.0\EntitySubSystemAPI.pdb
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySu.846E0063.Up2Date
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\refint\EntitySubSystem.dll
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\EntitySubSystem.pdb
+D:\bg-koka-hub-plugins\bgkoka-cs2-entity-touching-system\EntitySubSystem\obj\Debug\net8.0\ref\EntitySubSystem.dll

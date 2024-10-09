@@ -1,8 +1,6 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Entities;
-using static EntitySubSystemBase.EntityTouch;
-using static EntitySubSystemBase.EntitySystem;
 
 namespace EntitySubSystemBase;
 

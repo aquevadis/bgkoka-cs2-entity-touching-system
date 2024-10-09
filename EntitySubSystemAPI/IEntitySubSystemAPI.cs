@@ -1,13 +1,15 @@
 ﻿using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Core.Capabilities;
-using static EssAPI.IEssAPI;
 
-namespace EssAPI;
+namespace EntitySubSystemAPI;
 
-public interface IEssAPI {
+public interface IEntitySubSystemAPI {
 
-    public static readonly PluginCapability<IEssAPI> Capability = new("ess:core");
+    /// <summary>
+    /// event OnEntityTouchedByPlayer
+    /// </summary>
+    public event Action<CEntityInstance, CCSPlayerPawnBase> OnPlayerTouchEntity;
 
     /// <summary>
     /// Enable touch capabilities for an entity
@@ -21,8 +23,4 @@ public interface IEssAPI {
     /// <param name="entity">entity that will no longer fire when touched</param>
     public void RemovTouch(CEntityInstance entity);
 
-    /// <summary>
-    /// event OnEntityTouchedByPlayer
-    /// </summary>
-    public event Action<CEntityInstance, CCSPlayerPawnBase> EntityTouchedByPlayer;
 }

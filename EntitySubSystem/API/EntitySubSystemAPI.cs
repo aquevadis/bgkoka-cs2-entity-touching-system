@@ -1,12 +1,11 @@
-﻿using CounterStrikeSharp.API;
-using CounterStrikeSharp.API.Core;
-using EssAPI;
+﻿using CounterStrikeSharp.API.Core;
+using EntitySubSystemAPI;
 
 namespace EntitySubSystemBase;
 
-public class EssAPI : IEssAPI {
+public class EntitySubSystemAPI : IEntitySubSystemAPI {
 
-    public event Action<CEntityInstance, CCSPlayerPawnBase>? EntityTouchedByPlayer;
+    public event Action<CEntityInstance, CCSPlayerPawnBase>? OnPlayerTouchEntity;
 
     /// <summary>
     /// Enable touch capabilities for an entity
@@ -14,7 +13,7 @@ public class EssAPI : IEssAPI {
     /// <param name="entity">entity that will fire when touched</param>
     public void StartTouch(CEntityInstance entity) {
         
-        entity.StartTouch();
+        EntitySubSystemBase.StartTouch(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -28,7 +27,7 @@ public class EssAPI : IEssAPI {
     /// <param name="entity">entity that will no longer fire when touched</param>
     public void RemovTouch(CEntityInstance entity) {
 
-        entity.RemoveTouch();
+        EntitySubSystemBase.RemoveTouch(entity);
 
         //debug log:
         Console.ForegroundColor = ConsoleColor.Green;
@@ -36,14 +35,9 @@ public class EssAPI : IEssAPI {
         Console.ResetColor();
     }
 
-    public virtual void OnEntityTouchedByPlayer(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
+    public void PlayerTouchEntity(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
 
-        EntityTouchedByPlayer?.Invoke(touchedEntity, touchingPlayerPawnBase);
-
-        //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[OnEntityTouchByPlayer][API] {touchedEntity.DesignerName} touched by {touchingPlayerPawnBase.DesignerName}");
-        Console.ResetColor();
+        OnPlayerTouchEntity?.Invoke(touchedEntity, touchingPlayerPawnBase);
 
     }
 
