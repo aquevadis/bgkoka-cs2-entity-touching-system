@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EntitySubSystem")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db170f013d66f2327b6cfd1bc88136bc91c1ee41")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53a8d1ecc440c3f326f0c6754c4dd277d050ee85")]
 [assembly: System.Reflection.AssemblyProductAttribute("EntitySubSystem")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EntitySubSystem")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
