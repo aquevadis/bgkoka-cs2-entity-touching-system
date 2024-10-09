@@ -43,8 +43,10 @@ vignettes/*.pdf
 docs/
 bin/*
 obj/*
-EssAPI/bin/*
-EssAPI/obj/*
+EntitySubSystem/bin/*
+EntitySubSystem/obj/*
+EntitySubSystemAPI/bin/*
+EntitySubSystemAPI/obj/*
 
 # translation temp files
 po/*~
