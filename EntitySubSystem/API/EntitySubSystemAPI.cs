@@ -1,5 +1,6 @@
 ﻿using CounterStrikeSharp.API.Core;
 using EntitySubSystemAPI;
+using EntitySubSystemBase;
 
 namespace EntitySubSystemBase;
 
@@ -14,11 +15,10 @@ public class EntitySubSystemAPI : IEntitySubSystemAPI {
     public void StartTouch(CEntityInstance entity) {
         
         EntitySubSystemBase.StartTouch(entity);
-
         //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][API] Started Touch On entity index {entity.Index} (added to list)");
-        Console.ResetColor();
+        // Console.ForegroundColor = ConsoleColor.Green;
+        // Console.WriteLine($"[EntitySubSystem][API] Started Touch On entity index {entity.Index} (added to list)");
+        // Console.ResetColor();
     }
 
     /// <summary>
@@ -28,16 +28,19 @@ public class EntitySubSystemAPI : IEntitySubSystemAPI {
     public void RemovTouch(CEntityInstance entity) {
 
         EntitySubSystemBase.RemoveTouch(entity);
-
         //debug log:
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine($"[EntitySubSystem][API] Remove Touch On entity index {entity.Index} (added to list)");
-        Console.ResetColor();
+        // Console.ForegroundColor = ConsoleColor.Green;
+        // Console.WriteLine($"[EntitySubSystem][API] Remove Touch On entity index {entity.Index} (added to list)");
+        // Console.ResetColor();
     }
 
     public void PlayerTouchEntity(CEntityInstance touchedEntity, CCSPlayerPawnBase touchingPlayerPawnBase) {
 
         OnPlayerTouchEntity?.Invoke(touchedEntity, touchingPlayerPawnBase);
+        //debug log:
+        // Console.ForegroundColor = ConsoleColor.Green;
+        // Console.WriteLine($"[OnEntityTouchByPlayer][API] {touchedEntity.DesignerName} touched by {touchingPlayerPawnBase.DesignerName}");
+        // Console.ResetColor();
 
     }
 

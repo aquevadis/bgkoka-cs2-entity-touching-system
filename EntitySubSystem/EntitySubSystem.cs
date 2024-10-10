@@ -19,7 +19,6 @@ public partial class EntitySubSystemBase : BasePlugin, IPluginConfig<CoreConfig>
     
     //register API
     public static PluginCapability<IEntitySubSystemAPI> Capability {get;} = new("ess:base");
-
     public EntitySubSystemAPI Api { get; set; } = null!;
 
     public override void Load(bool hotReload)
