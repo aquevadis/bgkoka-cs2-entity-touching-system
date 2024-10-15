@@ -1,5 +1,4 @@
 ﻿using CounterStrikeSharp.API.Core;
-using static EntitySubSystemAPI.IEntitySubSystemAPI;
 
 namespace EntitySubSystemBase;
 
